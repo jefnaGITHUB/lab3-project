@@ -36,7 +36,7 @@ steps:
     ConnectionType: 'AzureRM'
     azureSubscription: 'sc-f29ds-rd2055'
     appType: 'webAppContainer'
-    WebAppName: 'rd2055-lab3'
+    WebAppName: 'rd2055-lab3-backend'
     DockerNamespace: 'jefna'
     DockerRepository: $(backendImage)
     DockerImageTag: '$(imageTag)'
