@@ -23,7 +23,7 @@ steps:
     buildContext: '.'
     repository: '$(backendImage)'
     containerRegistry: 'myDockerHub'
-    Dockerfile: '/backend/Dockerfile'
+    Dockerfile: 'backend/Dockerfile'
     tags: $(imageTag)
 
 - task: Docker@2
@@ -33,6 +33,6 @@ steps:
     buildContext: '.'
     repository: '$(frontendImage)'
     containerRegistry: 'myDockerHub'
-    Dockerfile: '/frontend/Dockerfile'
+    Dockerfile: 'frontend/Dockerfile'
     tags: $(imageTag)
 
