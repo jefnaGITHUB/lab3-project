@@ -28,7 +28,7 @@ steps:
         --resource-group rsg-F29DS \
         --name rd2055-lab3-frontend \
         --plan myAppServicePlan \
-        --container-image-name $(backendImage):$(imageTag)
+        --container-image-name $(frontend):$(imageTag)
 
 - task: AzureRmWebAppDeployment@5
   displayName: "Deploy backend to Azure"
@@ -37,8 +37,8 @@ steps:
     azureSubscription: 'sc-f29ds-rd2055'
     appType: 'webAppContainer'
     WebAppName: 'rd2055-lab3-backend'
-    DockerNamespace: 'jefna'
-    DockerRepository: lab3-project-backend
+    DockerNamespace: 'docker.io'
+    DockerRepository: $(backendImage)
     DockerImageTag: '$(imageTag)'
 
 - task: AzureRmWebAppDeployment@5
@@ -49,5 +49,5 @@ steps:
     appType: 'webAppContainer'
     WebAppName: 'rd2055-lab3-frontend'
     DockerNamespace: 'jefna'
-    DockerRepository: lab3-project-frontend
+    DockerRepository: $(frontendImage)
     DockerImageTag: '$(imageTag)'
