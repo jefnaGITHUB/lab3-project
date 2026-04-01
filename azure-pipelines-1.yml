@@ -10,6 +10,24 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+
+- task: AzureCLI@2
+  displayName: "Create backend and frontend web apps"
+  inputs:
+    azureSubscription: 'sc-f29ds-rd2055'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az webapp create \
+        --resource-group rsg-F29DS \
+        --name rd2055-lab3-backend \
+        --deployment-container-image-name $(backendImage):$(imageTag)
+
+      az webapp create \
+        --resource-group <your-resource-group> \
+        --name rd2055-lab3-frontend \
+        --deployment-container-image-name $(frontendImage):$(imageTag)
+
 - task: AzureRmWebAppDeployment@5
   displayName: "Deploy backend to Azure"
   inputs:
