@@ -38,7 +38,7 @@ steps:
     appType: 'webAppContainer'
     WebAppName: 'rd2055-lab3-backend'
     DockerNamespace: 'jefna'
-    DockerRepository: $(backendImage)
+    DockerRepository: lab3-project-backend
     DockerImageTag: '$(imageTag)'
 
 - task: AzureRmWebAppDeployment@5
@@ -49,5 +49,5 @@ steps:
     appType: 'webAppContainer'
     WebAppName: 'rd2055-lab3-frontend'
     DockerNamespace: 'jefna'
-    DockerRepository: $(frontendImage)
+    DockerRepository: lab3-project-frontend
     DockerImageTag: '$(imageTag)'
