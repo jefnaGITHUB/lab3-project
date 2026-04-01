@@ -20,7 +20,7 @@ steps:
   displayName: "Build and push backend image"
   inputs:
     command: 'buildAndPush'
-    buildContext: '.'
+    buildContext: 'backend'
     repository: '$(backendImage)'
     containerRegistry: 'myDockerHub'
     Dockerfile: 'backend/Dockerfile'
@@ -30,7 +30,7 @@ steps:
   displayName: "Build frontend image"
   inputs:
     command: 'build'
-    buildContext: '.'
+    buildContext: 'frontend'
     repository: '$(frontendImage)'
     containerRegistry: 'myDockerHub'
     Dockerfile: 'frontend/Dockerfile'
