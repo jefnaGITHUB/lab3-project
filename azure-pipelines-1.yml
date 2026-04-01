@@ -48,6 +48,6 @@ steps:
     azureSubscription: 'sc-f29ds-rd2055'
     appType: 'webAppContainer'
     WebAppName: 'rd2055-lab3-frontend'
-    DockerNamespace: 'jefna'
+    DockerNamespace: 'docker.io'
     DockerRepository: $(frontendImage)
     DockerImageTag: '$(imageTag)'
