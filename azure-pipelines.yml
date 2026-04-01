@@ -35,4 +35,5 @@ steps:
     containerRegistry: 'myDockerHub'
     Dockerfile: 'frontend/Dockerfile'
     tags: $(imageTag)
+    arguments: '--build-arg VITE_API_URL=https://rd2055-lab3-backend.azurewebsites.net'
 
