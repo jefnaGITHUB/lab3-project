@@ -17,4 +17,4 @@ RUN pnpm run build
 
 EXPOSE 3000
 
-CMD ["serve", "-s", "frontend/dist", "-l", "3000"]
+CMD ["serve", "-s", "dist", "-l", "3000"]
