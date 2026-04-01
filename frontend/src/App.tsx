@@ -15,7 +15,7 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<Message | null>(null);
 
-  const API_URL = process.env.API_URL || "";
+  const API_URL = import.meta.env.VITE_API_URL || "";
 
   const fetchHealth = async () => {
     try {

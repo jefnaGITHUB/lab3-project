@@ -1,17 +1,17 @@
 FROM node:20
 
-RUN npm install pnpm serve
- 
+RUN npm install -g pnpm serve
+
 WORKDIR /app
- 
-COPY package*.json ./
+
+COPY package.json pnpm-lock.yaml ./
 
 RUN pnpm install
- 
+
 COPY . .
 
 RUN pnpm run build
- 
+
 EXPOSE 3000
- 
-CMD ["serve", "-s", "build", "-l", "3000"]
+
+CMD ["serve", "-s", "frontend/dist", "-l", "3000"]
