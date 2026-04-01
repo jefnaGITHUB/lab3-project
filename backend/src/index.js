@@ -8,13 +8,15 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/api/health", (req, res) => {
+  console.log("running the health check");
   res.json({
-    status: "ok",
-    service: "backend",
+    status: "OK",
+    service: "Backend",
   });
 });
 
 app.get("/api/message", (req, res) => {
+  console.log("running the message endpoint");
   const messages = [
     "Ryan is cool",
     "Santi is cool",
