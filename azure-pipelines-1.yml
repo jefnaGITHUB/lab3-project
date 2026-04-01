@@ -21,12 +21,14 @@ steps:
       az webapp create \
         --resource-group rsg-F29DS \
         --name rd2055-lab3-backend \
-        --plan myAppServicePlan
+        --plan myAppServicePlan \
+        --deployment-container-image-name $(backendImage):$(imageTag)
 
       az webapp create \
         --resource-group rsg-F29DS \
         --name rd2055-lab3-frontend \
-        --plan myAppServicePlan
+        --plan myAppServicePlan \
+        --deployment-container-image-name $(backendImage):$(imageTag)
 
 - task: AzureRmWebAppDeployment@5
   displayName: "Deploy backend to Azure"
