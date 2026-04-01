@@ -28,7 +28,7 @@ steps:
         --resource-group rsg-F29DS \
         --name rd2055-lab3-frontend \
         --plan myAppServicePlan \
-        --container-image-name $(frontend):$(imageTag)
+        --container-image-name $(frontendImage):$(imageTag)
 
 - task: AzureRmWebAppDeployment@5
   displayName: "Deploy backend to Azure"
