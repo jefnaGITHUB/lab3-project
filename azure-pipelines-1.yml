@@ -1,0 +1,53 @@
+variables:
+  backendImage: jefna/lab3-project-backend
+  frontendImage: jefna/lab3-project-frontend
+  imageTag: latest
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+
+- task: AzureCLI@2
+  displayName: "Create backend and frontend web apps"
+  inputs:
+    azureSubscription: 'sc-f29ds-rd2055'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az webapp create \
+        --resource-group rsg-F29DS \
+        --name rd2055-lab3-backend \
+        --plan myAppServicePlan \
+        --container-image-name $(backendImage):$(imageTag)
+
+      az webapp create \
+        --resource-group rsg-F29DS \
+        --name rd2055-lab3-frontend \
+        --plan myAppServicePlan \
+        --container-image-name $(frontendImage):$(imageTag)
+
+- task: AzureRmWebAppDeployment@5
+  displayName: "Deploy backend to Azure"
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'sc-f29ds-rd2055'
+    appType: 'webAppContainer'
+    WebAppName: 'rd2055-lab3-backend'
+    DockerNamespace: 'docker.io'
+    DockerRepository: $(backendImage)
+    DockerImageTag: '$(imageTag)'
+
+- task: AzureRmWebAppDeployment@5
+  displayName: "Deploy frontend to Azure"
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'sc-f29ds-rd2055'
+    appType: 'webAppContainer'
+    WebAppName: 'rd2055-lab3-frontend'
+    DockerNamespace: 'docker.io'
+    DockerRepository: $(frontendImage)
+    DockerImageTag: '$(imageTag)'

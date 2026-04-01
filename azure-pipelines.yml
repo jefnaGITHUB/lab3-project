@@ -1,0 +1,47 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  backendImage: jefna/lab3-project-backend
+  frontendImage: jefna/lab3-project-frontend
+  imageTag: latest
+
+steps:
+
+- task: Docker@2
+  displayName: "Build and push backend image"
+  inputs:
+    command: 'buildAndPush'
+    buildContext: 'backend'
+    repository: '$(backendImage)'
+    containerRegistry: 'myDockerHub'
+    Dockerfile: 'backend/Dockerfile'
+    tags: $(imageTag)
+
+- task: Docker@2
+  displayName: "Build frontend image"
+  inputs:
+    command: 'build'
+    buildContext: 'frontend'
+    repository: '$(frontendImage)'
+    containerRegistry: 'myDockerHub'
+    Dockerfile: 'frontend/Dockerfile'
+    tags: $(imageTag)
+    arguments: '--build-arg VITE_API_URL=https://rd2055-lab3-backend.azurewebsites.net'
+
+- task: Docker@2
+  displayName: "Push frontend image"
+  inputs:
+    command: 'push'
+    repository: '$(frontendImage)'
+    containerRegistry: 'myDockerHub'
+    tags: $(imageTag)
+
